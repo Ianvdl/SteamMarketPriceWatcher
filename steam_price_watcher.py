@@ -31,8 +31,10 @@ def getPrices():
         print "Lowest Price: USD$ " + regex_matches[0] + "            " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sys.stdout.flush()
 
-    s = sched.scheduler(time.time, time.sleep)
-    s.enter(10, check_timeout, getPrices, ())
-    s.run()
+    #s = sched.scheduler(time.time, time.sleep)
+    #s.enter(10, check_timeout, getPrices, ())
+    #s.run()
+    time.sleep(check_timeout)
+    getPrices()
 
 getPrices()
