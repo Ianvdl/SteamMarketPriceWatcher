@@ -1,12 +1,13 @@
 #J. van der Linde
 #Steam Marketplace Price Watcher
-#Last updated 2015-07-23
+#Last updated 2015-07-24
 
 import urllib
 import re
 import time
 import sched
 import sys
+import datetime
 
 #==============================================================
 #As a user, the lines below are all you need to change
@@ -27,7 +28,7 @@ def getPrices():
     if (float(regex_matches[0]) <= ideal_price):
         print "Lowest Price: USD$ " + regex_matches[0] + "     <===== Lower than your ideal price! Buy!"
     else:
-        print "Lowest Price: USD$ " + regex_matches[0]
+        print "Lowest Price: USD$ " + regex_matches[0] + "            " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sys.stdout.flush()
 
     s = sched.scheduler(time.time, time.sleep)
