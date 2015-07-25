@@ -36,6 +36,7 @@ def getPrices():
     price = float(regex_matches[0])
     if price < lowest_recorded:
         lowest_recorded = price
+        winsound.Beep(2000, 700)
 
     if (price <= ideal_price):
         print "Lowest Price: USD$ " + str(price) + "\t<===== Lower than your ideal price! Buy!"
