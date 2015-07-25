@@ -8,7 +8,12 @@ import time
 import sched
 import sys
 import datetime
-import winsound
+winsound_avail = True
+try:
+    import winsound
+except:
+    winsound_avail = False
+    print "Warning: winsound not available. Terminal bell disabled.\n"
 
 #==============================================================
 #As a user, the lines below are all you need to change
@@ -19,6 +24,10 @@ check_timeout = 10              #Delay between checks in seconds
 #==============================================================
 
 lowest_recorded = 999999999
+
+def beep(freq, duration):
+    if winsound_avail:
+        winsound.Beep(freq, duration)
 
 def getPrices():
     global lowest_recorded
@@ -36,11 +45,11 @@ def getPrices():
     price = float(regex_matches[0])
     if price < lowest_recorded:
         lowest_recorded = price
-        winsound.Beep(2000, 700)
+        beep(2000, 700)
 
     if (price <= ideal_price):
         print "Lowest Price: USD$ " + str(price) + "\t<===== Lower than your ideal price! Buy!"
-        winsound.Beep(2000, 4000)
+        beep(2000, 4000)
     else:
         print "Lowest Price: USD$ " + str(price) + "\t" + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\tRecord Low: USD$ " + str(lowest_recorded)
     sys.stdout.flush()
